@@ -1,0 +1,42 @@
+{
+    "name": "game-restaurant",
+    "version": "1.0.0",
+    "description": "风尚美食专属工具",
+    "author": "Cocos Creator",
+    "main": "main.js",
+    "main-menu": {
+        "Packages/Game风味小馆专属/顾客Spine/批处理": {
+            "message": "game-restaurant:guest_spine"
+        },
+        "Packages/Game风味小馆专属/顾客图鉴列表/批处理": {
+            "message": "game-restaurant:guest_list_maker"
+        },
+        "Packages/Game风味小馆专属/食物素材/批处理": {
+            "message": "game-restaurant:food_maker"
+        },
+        "Packages/Game风味小馆专属/家具素材/批处理": {
+            "message": "game-restaurant:furniture_maker"
+        },
+        "Packages/Game风味小馆专属/配置导出/通用xlsx": {
+            "message": "game-restaurant:config_xlsx"
+        },
+        "Packages/Game风味小馆专属/配置导出/故事xlsx": {
+            "message": "game-restaurant:story_xlsx"
+        },
+        "Packages/Game风味小馆专属/配置导出/可视化配置": {
+            "message": "game-restaurant:config_position"
+        }
+    },
+    "dependencies": {
+        "async": "^2.6.1",
+        "excel": "^1.0.0",
+        "fs-extra": "^5.0.0",
+        "glob": "^7.1.2",
+        "image-size": "^0.6.3",
+        "jimp": "^0.2.28",
+        "json-format": "^1.0.1",
+        "request": "^2.85.0",
+        "resize-img": "^1.1.2",
+        "tar": "^4.4.0"
+    }
+}
