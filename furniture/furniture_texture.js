@@ -4,7 +4,6 @@ const path = require('path');
 const glob = require("glob");
 const async = require("async");
 const { exec, spawn } = require('child_process');
-const sizeOf = require('image-size');
 const Jimp = require("jimp");
 const os = require('os');
 const outPath = 'dynamic/extend/furnitures';
@@ -56,7 +55,6 @@ class FurnitureMaker {
             let fileImageThumb = path.resolve(entry.basePath, `thumb.png`);
             let fileBig = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/${entry.basename}.png`);
             let fileIcon = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/thumb.png`);
-            // let dimensions = sizeOf(fileImage);
             let scaleRate = 1386/4872;
             let isCustomIcon = false;
             let isMulti = false;

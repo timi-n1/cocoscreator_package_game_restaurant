@@ -46,32 +46,51 @@ class ToysMaker {
             // fs.copySync(, );
             let fileImage = path.resolve(entry.basePath, `${entry.basename}.png`);
             let fileEatSource = path.resolve(entry.basePath, `icon.png`);
+            let fileBoardSource = path.resolve(entry.basePath, `board.png`);
+
             let fileOut = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/${entry.basename}.png`);
             let fileIcon = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/thumb.png`);
             let fileEat = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/icon.png`);
+            let fileBoard = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/board.png`);
             let scaleRate = 1386/4872;
-            
-            Jimp.read(fileImage, (err, lenna) => {
-                if (err) throw err;
-                lenna.scale(scaleRate).write(fileOut);
+
+            async.series([
+                //scale
+                (callback)=>{
+                    Jimp.read(fileImage, (err, lenna) => {
+                        lenna.scale(scaleRate).write(fileOut);
+                        callback();
+                    });
+                },
                 //thumb
-                Jimp.read(fileImage, (err, lenna) => {
-                    if (err) throw err;
-                    lenna.scaleToFit(170, 110).write(fileIcon);
-                    //icon
+                (callback)=>{
+                    Jimp.read(fileImage, (err, lenna) => {
+                        lenna.scaleToFit(170, 110).write(fileIcon);
+                        callback();
+                    });
+                },
+                //icon
+                (callback)=>{
                     if( !fs.existsSync(fileEatSource) ){
                         fileEatSource = fileImage;
                     }
                     Jimp.read(fileEatSource, (err, lenna) => {
-                        if (err) throw err;
-                        lenna.scaleToFit(100, 100).write(fileEat);
-                        this._refreshTexture(entry.basename);
-                        Editor.log(`[食物]${entry.basename}`);
-                        cb();
+                        lenna.scaleToFit(120, 120).write(fileEat);
+                        callback();
                     });
-                });
+                },
+                //board
+                (callback)=>{
+                    Jimp.read(fileBoardSource, (err, lenna) => {
+                        lenna.scaleToFit(100, 130).write(fileBoard);
+                        callback();
+                    });
+                }
+            ], ()=>{
+                this._refreshTexture(entry.basename);
+                Editor.log(`[食物]${entry.basename}`);
+                cb();
             });
-    
         }, ()=>{
             done();
         });
