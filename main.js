@@ -5,7 +5,7 @@ let thisProjectName = 'restaurant';
 
 var isOK = function(done){
     const path = require('path');
-    const fs = require('fs');
+    const fs = require('fs-extra');
     const packagePath = path.resolve(Editor.projectInfo.path, `./package.json`);
     const json = JSON.parse( fs.readFileSync(packagePath).toString() );
     if( json.name == thisProjectName ){
@@ -13,6 +13,20 @@ var isOK = function(done){
     }
     else{
         Editor.error(`该项目为${json.name}，插件绑定项目为${thisProjectName}`);
+    }
+};
+
+var getInnerUploadUrl = function(){
+    const path = require('path');
+    const fs = require('fs-extra');
+    const packagePath = path.resolve(Editor.projectInfo.path, `./package.json`);
+    const json = JSON.parse( fs.readFileSync(packagePath).toString() );
+    if( json.innerUploadUrl ){
+        return json.innerUploadUrl;
+    }
+    else{
+        Editor.error(`找不到innerUploadUrl字段`);
+        return '';
     }
 };
 
@@ -28,17 +42,17 @@ module.exports = {
     messages: {
         'config_xlsx'() {
             isOK(()=>{
-                require('./excel/excel')();
+                require('./excel/excel')( getInnerUploadUrl() );
             });
         },
         'story_xlsx'(){
             isOK(()=>{
-                require('./excel/story_excel')(); 
+                require('./excel/story_excel')( getInnerUploadUrl() ); 
             });
         },
         'config_position'() {
             isOK(()=>{
-                require('./yardconfig/index')(); 
+                require('./yardconfig/index')( getInnerUploadUrl() ); 
             });
         },
         'guest_spine'() {

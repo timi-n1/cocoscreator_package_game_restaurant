@@ -8,6 +8,8 @@ var D = {
     food: null
 };
 
+var innerUploadUrl = '';
+
 class YardConfigParser{
 
     constructor(type, done){
@@ -64,7 +66,7 @@ class YardConfigParser{
     }
 
     upload(filename, data, done) {
-        request.post('http://10.54.238.67:8080/n/restaurant/config', { form: { filename: filename, data: JSON.stringify(data) } }, (err, httpResponse, body) => {
+        request.post(`${innerUploadUrl}/n/restaurant/config`, { form: { filename: filename, data: JSON.stringify(data) } }, (err, httpResponse, body) => {
             Editor.log('上传到后台:' + body);
             done && done(data);
         });
@@ -122,7 +124,8 @@ class YardConfigParser{
 
 }
 
-module.exports = function(){
+module.exports = function(innerUploadUrl_){
+    innerUploadUrl = innerUploadUrl_;
     new YardConfigParser('furniture', (data)=>{
         D.furniture = data;
         new YardConfigParser('guest', (data)=>{

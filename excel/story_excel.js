@@ -9,7 +9,8 @@ const request = require('request');
 
 class ExcelMaker {
 
-    constructor() {
+    constructor(innerUploadUrl) {
+        this.innerUploadUrl = innerUploadUrl;
         this.data = {};
         //数字数组
         this.keyInt = ['id', 'food_id'];
@@ -81,7 +82,7 @@ class ExcelMaker {
     }
 
     upload(filename, data, done) {
-        request.post('http://10.54.238.67:8080/n/restaurant/config', { form: { filename: filename, data: JSON.stringify(data) } }, (err, httpResponse, body) => {
+        request.post(`${this.innerUploadUrl}/n/restaurant/config`, { form: { filename: filename, data: JSON.stringify(data) } }, (err, httpResponse, body) => {
             Editor.log('上传到后台:' + body);
             done && done();
         });
@@ -93,6 +94,6 @@ class ExcelMaker {
 
 }
 
-module.exports = function () {
-    new ExcelMaker();
+module.exports = function (innerUploadUrl) {
+    new ExcelMaker(innerUploadUrl);
 }
