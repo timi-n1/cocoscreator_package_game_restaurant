@@ -140,7 +140,26 @@ class ExcelMaker {
 
                 }
             })
-            fs.writeFileSync(this.getOutputPath(filename), `export default ${jsonFormat(data, { type: 'space' })}`);
+            let localData = data.slice(0);
+            if( filename == 'guest_category' ){
+                localData.push([
+                    10000,
+                    "不显示",
+                    "lonely_grandma",
+                    "独居的老奶奶，记性有点差，很担心她能不能照顾好自己。",
+                    "1",
+                    [2006],
+                    [6001,6002,6003,6004,6005,6006,6007,6008,6009,6010],
+                    [1,5,10,20,30,45,60,75,88,100],
+                    9,
+                    -22,
+                    1,
+                    1,
+                    1,
+                    1
+                ]);
+            }
+            fs.writeFileSync(this.getOutputPath(filename), `export default ${jsonFormat(localData, { type: 'space' })}`);
             Editor.success(`[成功]${filename}`);
             setTimeout(() => {
                 Editor.assetdb.refresh(`db://assets/script/data/config/config.${filename}.ts`);

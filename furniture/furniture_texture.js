@@ -55,62 +55,74 @@ class FurnitureMaker {
             let fileImageThumb = path.resolve(entry.basePath, `thumb.png`);
             let fileBig = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/${entry.basename}.png`);
             let fileIcon = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/thumb.png`);
-            let scaleRate = 1386/4872;
+            let scaleRate = 1386 / 4872;
             let isCustomIcon = false;
             let isMulti = false;
 
             async.parallel([
-                (cb0)=>{
+                (cb0) => {
                     async.eachOfSeries([1, 2, 3, 4, 5, 6], (index0, i, cb9) => {
                         const f = path.resolve(entry.basePath, `${index0}.png`);
                         if (fs.existsSync(f)) {
                             isMulti = true;
                             Jimp.read(f, (err, lenna) => {
                                 if (err) throw err;
-                                lenna.scale(scaleRate).write(path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/${index0}.png`));
-                                cb9();
+                                lenna
+                                    .scale(scaleRate)
+                                    .write(path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/${index0}.png`), () => {
+                                        lenna = null;
+                                        // this._refreshMulti(entry.basename, index0);
+                                        setImmediate(cb9);
+                                    });
                             });
-                            this._refreshMulti(entry.basename, index0);
                         }
                         else {
-                            cb9();
+                            setImmediate(cb9);
                         }
                     }, () => {
-                        cb0();
+                        setImmediate(cb0);
                     });
                 },
                 (cb0) => {
-                    if( isMulti ){
+                    if (isMulti) {
                         cb0();
                         return;
                     }
                     //大图
                     Jimp.read(fileImage, (err, lenna) => {
                         if (err) throw err;
-                        lenna.scale(scaleRate).write(fileBig);
-                        cb0();
+                        lenna
+                            .scale(scaleRate)
+                            .write(fileBig, () => {
+                                lenna = null;
+                                setImmediate(cb0);
+                            });
                     });
                 },
                 (cb0) => {
-                    //icon，先查找是否有thumb.png
+                    //icon，先查找是否有thumb.png1
                     if (fs.existsSync(fileImageThumb)) {
                         fs.copySync(fileImageThumb, fileIcon);
                         isCustomIcon = true;
-                        cb0();
+                        setImmediate(cb0);
                     }
                     else {
                         Jimp.read(fileImage, (err, lenna) => {
                             if (err) throw err;
-                            lenna.scaleToFit(190, 145).write(fileIcon);
-                            cb0();
+                            lenna
+                                .scaleToFit(190, 145)
+                                .write(fileIcon, () => {
+                                    lenna = null;
+                                    setImmediate(cb0);
+                                });
                         });
                     }
                 }
             ], () => {
                 setImmediate(() => {
-                    this._refreshTexture(entry.basename);
-                    Editor[(isCustomIcon||isMulti) ? 'warn' : 'log'](`[家具]${entry.basename}`);
-                    cb();
+                    // this._refreshTexture(entry.basename);
+                    Editor[(isCustomIcon || isMulti) ? 'warn' : 'log'](`[家具]${entry.basename}`);
+                    setImmediate(cb);
                 });
             });
 
