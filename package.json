@@ -1,6 +1,6 @@
 {
     "name": "game-restaurant",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "风尚美食专属工具",
     "author": "Cocos Creator",
     "main": "main.js",
@@ -19,6 +19,9 @@
         },
         "Packages/Game风味小馆专属/配置导出/通用xlsx": {
             "message": "game-restaurant:config_xlsx"
+        },
+        "Packages/Game风味小馆专属/配置导出/结账吐槽xlsx": {
+            "message": "game-restaurant:checkout_xlsx"
         },
         "Packages/Game风味小馆专属/配置导出/任务xlsx": {
             "message": "game-restaurant:task_xlsx"

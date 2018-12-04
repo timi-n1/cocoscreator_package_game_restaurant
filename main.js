@@ -45,6 +45,11 @@ module.exports = {
                 require('./excel/excel')( getInnerUploadUrl() );
             });
         },
+        'checkout_xlsx'(){
+            isOK(()=>{
+                require('./excel/checkout_excel')( getInnerUploadUrl() ); 
+            });
+        },
         'task_xlsx'(){
             isOK(()=>{
                 require('./excel/task_excel')( getInnerUploadUrl() ); 
