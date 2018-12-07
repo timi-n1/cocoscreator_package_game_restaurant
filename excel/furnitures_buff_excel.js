@@ -49,33 +49,52 @@ class ExcelMaker {
 
     parseExel(file, filename, done) {
         parseXlsx(file).then((data) => {
-            const ret = {};
-            data.forEach((d, i)=>{
-                const type = d[0];
-                const val1 = d[1];
-                const val2 = d[2];
-                switch(type){
-                    default:
-                        if( this.keyInt.includes(type) ){
-                            ret[type] = parseInt(val1, 10);
-                            if( isNaN(ret[type]) ){
-                                ret[type] = 0;
-                            }
-                        }
-                        else{
-                            ret[type] = val1;
-                        }
-                        break;
+            let index2keyMap = {};
+            data.forEach((d, i) => {
+                if (i == 0) {
+                    d.forEach((key, index) => {
+                        index2keyMap[index] = key;
+                    });
                 }
-            });
-            if( !this.data.length ){
-                this.data.push(Object.keys(ret));
-            }
-            const json = [];
-            for(var v in ret){
-                json.push(ret[v]);
-            }
-            this.data.push(json);
+                if (i > 0) {
+                    d.forEach((val, index) => {
+                        const key = index2keyMap[index];
+                        if (this.keyInt.includes(key)) {
+                            data[i][index] = parseInt((val || '0'), 10);
+                        }
+                        /*
+                        else if (this.keyFloat.includes(key)) {
+                            data[i][index] = parseFloat((val || '0.0'), 10);
+                        }
+                        else if (this.keyIntArray.includes(key)) {
+                            var temp = val.split(',');
+                            var arr = [];
+                            temp.forEach((chr) => {
+                                chr && arr.push(parseInt(chr, 10));
+                            });
+                            data[i][index] = arr;
+                        }else if(this.keyStringArray.includes(key)){
+                            var temp = val.split('+');
+                            var arr = [];
+                            temp.forEach((chr) => {
+                                chr && arr.push(chr);
+                            });
+                            data[i][index] = arr;
+                        }
+                        if (val && chrConifg && chrConifg.includes(key)) {
+                            val.split('').forEach((chr) => {
+                                this.cnCache[chr] = true;
+                                if( this.keyListSimple.includes(key) ){
+                                    this.cnCacheSimple[chr] = true;
+                                }
+                            });
+                        }
+                        */
+                    });
+
+                }
+            })
+            this.data = data.slice(0);
             Editor.success(`[成功]${filename}`);
             setTimeout(() => {
                 done();
