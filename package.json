@@ -1,6 +1,6 @@
 {
     "name": "game-restaurant",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "风尚美食专属工具",
     "author": "Cocos Creator",
     "main": "main.js",
@@ -28,6 +28,9 @@
         },
         "Packages/Game风味小馆专属/配置导出/故事xlsx": {
             "message": "game-restaurant:story_xlsx"
+        },
+        "Packages/Game风味小馆专属/配置导出/家具特效xlsx": {
+            "message": "game-restaurant:furnitures_buff_xlsx"
         },
         "Packages/Game风味小馆专属/配置导出/可视化配置": {
             "message": "game-restaurant:config_position"

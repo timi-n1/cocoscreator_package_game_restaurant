@@ -60,6 +60,11 @@ module.exports = {
                 require('./excel/story_excel')( getInnerUploadUrl() ); 
             });
         },
+        'furnitures_buff_xlsx'(){
+            isOK(()=>{
+                require('./excel/furnitures_buff_excel')( getInnerUploadUrl() ); 
+            });
+        },
         'config_position'() {
             isOK(()=>{
                 require('./yardconfig/index')( getInnerUploadUrl() ); 
