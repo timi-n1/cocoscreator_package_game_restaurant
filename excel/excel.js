@@ -28,7 +28,7 @@ class ExcelMaker {
         //简要中文
         this.keyListSimple = ['talk_btn1', 'talk_btn2', 'talk_btn3', 'complete_btn1', 'complete_btn2', 'complete_btn3'];
         this.cnCacheSimple = {};
-        this.keyInt = ['id', 'pid', 'price', 'type', 'sub_type', 'pose_ids', 'ancient', 'modern', 'east', 'west', 'toy_sub_type', 'rare', 'intimacy', 'award', 'character', 'dispatch', 'cat_type', 'play_time', 'is_skin', 'sampleCatId', 'torso_offsetx', 'torso_offsety', 'is_multi', 'stock_price', 'bonus_price', 'sour', 'sweet', 'bitter', 'spicy', 'oa_unlock', 'effects_type', 'effects', "learn_time"];
+        this.keyInt = ['id', 'pid', 'price', 'type', 'sub_type', 'pose_ids', 'ancient', 'modern', 'east', 'west', 'toy_sub_type', 'rare', 'intimacy', 'award', 'character', 'dispatch', 'cat_type', 'play_time', 'is_skin', 'sampleCatId', 'torso_offsetx', 'torso_offsety', 'is_multi', 'stock_price', 'bonus_price', 'sour', 'sweet', 'bitter', 'spicy', 'oa_unlock', 'effects_type', 'effects', "learn_time", "scores"];
         this.keyFloat = ['anchorx', 'anchory'];
         this.keyIntArray = ['id_list', 'anima_list', 'yard_type', 'story_list', 'intimacy_list', 'like_food'];//默认按照,(半角)分割
         this.keyStringArray = ['message_list'];//消息数组
