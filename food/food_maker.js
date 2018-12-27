@@ -52,6 +52,7 @@ class ToysMaker {
             let fileIcon = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/thumb.png`);
             let fileEat = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/icon.png`);
             let fileBoard = path.resolve(Editor.projectInfo.path, `./assets/resources/${outPath}/textures/${entry.basename}/board.png`);
+            let fileShare = path.resolve(Editor.projectInfo.path, `./assets/resources/dynamic/images/share/share_food_${entry.basename}.png`);
             let scaleRate = 1386/4872;
 
             async.series([
@@ -85,7 +86,14 @@ class ToysMaker {
                         lenna.scaleToFit(100, 130).write(fileBoard);
                         callback();
                     });
-                }
+                },
+                //分享
+                (callback)=>{
+                    Jimp.read(fileImage, (err, lenna) => {
+                        lenna.scaleToFit(390, 296).write(fileShare);
+                        callback();
+                    });
+                },
             ], ()=>{
                 this._refreshTexture(entry.basename);
                 Editor.log(`[食物]${entry.basename}`);
