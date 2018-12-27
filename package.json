@@ -1,6 +1,6 @@
 {
     "name": "game-restaurant",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "description": "风尚美食专属工具",
     "author": "Cocos Creator",
     "main": "main.js",
@@ -34,6 +34,9 @@
         },
         "Packages/Game风味小馆专属/配置导出/可视化配置": {
             "message": "game-restaurant:config_position"
+        },
+        "Packages/Game风味小馆专属/纹理再优化处理": {
+            "message": "game-restaurant:texture_min"
         }
     },
     "dependencies": {

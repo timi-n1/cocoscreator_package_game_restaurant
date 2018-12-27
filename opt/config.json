@@ -1,0 +1,154 @@
+[
+    {
+        "name": "土豆泥、奶桶肉、蟹酿橙上桌尺寸缩小",
+        "basepath": "assets/resources/dynamic/extend/food/textures",
+        "filter": [
+            "aligot_potato/icon.png",
+            "milk_mutton/icon.png",
+            "orange_crab/icon.png",
+            "spicy_lobster/icon.png",
+            "chicken_soup/icon.png",
+            "piggy_pot/icon.png",
+            "roast_pig/icon.png"
+        ],
+        "limit": {
+            "widthMin": 110
+        },
+        "rule": [
+            {
+                "method": "scaleBy",
+                "param": -0.3
+            }
+        ]
+    },
+    {
+        "name": "splash大图",
+        "basepath": "assets",
+        "filter": [
+            "res/images/splash.png"
+        ],
+        "limit": {
+            "widthMin": 640
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 512,
+                "height": 1024
+            }
+        ]
+    },
+    {
+        "name": "故事站背景",
+        "basepath": "assets/resources/persist/images",
+        "filter": [
+            "bg_gushizhan.png"
+        ],
+        "limit": {
+            "widthMin": 640
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 256,
+                "height": 256
+            }
+        ]
+    },
+    {
+        "name": "家具缩小到1024",
+        "basepath": "assets/resources/dynamic/extend/furnitures/textures",
+        "filter": [
+            "european_cupboard/european_cupboard.png",
+            "original_cupboard/original_cupboard.png"
+        ],
+        "limit": {
+            "widthMin": 1100
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 1024,
+                "height": 1024
+            }
+        ]
+    },
+    {
+        "name": "家具缩小到2048",
+        "basepath": "assets/resources/dynamic/extend/furnitures/textures",
+        "filter": [
+            "european_decoration/european_decoration.png",
+            "original_decoration/original_decoration.png"
+        ],
+        "limit": {
+            "widthMin": 2050
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 2048,
+                "height": 1024
+            }
+        ]
+    },
+    {
+        "name": "家具缩小到512",
+        "basepath": "assets/resources/dynamic/extend/furnitures/textures",
+        "filter": [
+            "original_door/original_door.png",
+            "metal_door/metal_door.png",
+            "original_foodboard/original_foodboard.png"
+        ],
+        "limit": {
+            "widthMin": 520
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 512,
+                "height": 512
+            }
+        ]
+    },
+    {
+        "name": "家具缩小到256",
+        "basepath": "assets/resources/dynamic/extend/furnitures/textures",
+        "filter": [
+            "wood_table/wood_table.png"
+        ],
+        "limit": {
+            "widthMin": 260
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 256,
+                "height": 256
+            }
+        ]
+    },
+    {
+        "name": "家具缩小到宽度限制256",
+        "basepath": "assets/resources/dynamic/extend/furnitures/textures",
+        "filter": [
+            "photo_walldecoration/photo_walldecoration.png",
+            "original_walldecoration/original_walldecoration.png",
+            "original_frypan/original_frypan.png",
+            "original_steamer/original_steamer.png",
+            "original_carpet/original_carpet.png",
+            "original_sink/original_sink.png",
+            "original_cashregister/original_cashregister.png",
+            "bake_oven/bake_oven.png"
+        ],
+        "limit": {
+            "widthMin": 260
+        },
+        "rule": [
+            {
+                "method": "scaleFit",
+                "width": 256,
+                "height": 1024
+            }
+        ]
+    }
+]
