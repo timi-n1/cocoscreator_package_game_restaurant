@@ -88,6 +88,11 @@ module.exports = {
                 require('./food/food_maker')();
             });
         },
+        'texture_min'(){
+            isOK(()=>{
+                require('./opt/texture_min')();
+            });
+        },
         // 'food_texture_maker'() {
         //     require('./food/food_maker')();
         // },
