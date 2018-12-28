@@ -5,12 +5,14 @@ const Jimp = require('jimp');
 const sizeOf = require('image-size');
 const os = require('os');
 const configFile = path.resolve(__dirname, './config.json');
+const outFile = path.resolve(Editor.projectInfo.path, './assets/script/data/config/config.furnitures_size.ts');
 
 
 class Work {
 
     constructor() {
         this.outLog = [];
+        this.sizeCfg = JSON.parse( fs.readFileSync(outFile).toString().replace('export default ', '') );
         if (fs.existsSync(configFile)) {
             this.data = JSON.parse(fs.readFileSync(configFile).toString());
             this.duelAll();
@@ -25,7 +27,6 @@ class Work {
                 cb();
             });
         }, () => {
-            // Editor.warn(this.outLog);
             this.finishOut(this.outLog);
             Editor.success('全部完成!');
         });
@@ -34,13 +35,10 @@ class Work {
         async.eachOfSeries(cfg.filter, (file0, i, cb) => {
             const file = path.resolve(Editor.projectInfo.path, cfg.basepath, file0);
             if (fs.existsSync(file)) {
-                // Editor.warn(file);
-                this._dule(file, cfg.rule, cfg.limit, () => {
-                    const originFile = this._originFile(file);
-                    Editor.log(fs.existsSync(originFile), originFile);
-                    fs.existsSync(originFile) && this.outLog.push({
+                this._dule(file, cfg.rule, cfg.limit, (sizeFrom) => {
+                    this.outLog.push({
                         file: file,
-                        sizeFrom: sizeOf(originFile),
+                        sizeFrom: sizeFrom,
                         sizeTo: sizeOf(file)
                     });
                     Editor.assetdb.refresh(`db://${cfg.basepath}/${file0}`);
@@ -59,18 +57,21 @@ class Work {
         const size = sizeOf(file);
         if (this._matchLimit(size, limit)) {
             Editor.warn(`[跳过]]${file}`);
-            // fs.copySync(file, path.resolve(__dirname, `./temp/${encodeURIComponent(file)}`));
-            done();
+            done(false);
             return;
         }
         async.eachOfSeries(rule, (r, i, cb) => {
             if (this[`_dule_${r.method}`]) {
-                fs.copySync(file, this._originFile(file));
-                this[`_dule_${r.method}`](file, size, r, cb);
+                let sizeFrom = sizeOf(file);
+                Editor.log(`[处理]]${file}`, sizeFrom);
+                this[`_dule_${r.method}`](file, size, r, ()=>{
+
+                    cb(sizeFrom);
+                });
             }
             else {
                 Editor.warn(r.method + '未定义');
-                cb();
+                cb(false);
             }
         }, () => {
             done();
@@ -83,7 +84,7 @@ class Work {
         return false;
     }
     _dule_scaleBy(file, size, r, cb) {
-        Editor.log(`[scaleBy][${r.param}]${file}`);
+        // Editor.log(`[scaleBy][${r.param}]${file}`);
         Jimp.read(file, (err, img) => {
             img
                 .resize(size.width * (1 + r.param), size.height * (1 + r.param))
@@ -93,7 +94,7 @@ class Work {
         });
     }
     _dule_scaleFit(file, size, r, cb) {
-        Editor.log(`[scaleFit][${r.width}*${r.height}]${file}`);
+        // Editor.log(`[scaleFit][${r.width}*${r.height}]${file}`);
         Jimp.read(file, (err, img) => {
             img
                 .scaleToFit(r.width, r.height)
@@ -102,22 +103,23 @@ class Work {
                 });
         });
     }
-    _originFile(file){
-        return path.resolve(os.tmpdir(), `./a/restaurant/texture_min/${encodeURIComponent(file)}`);
-    }
     finishOut(log){
         let cfg = {};
         log.forEach((d)=>{
             // Editor.warn(d.file);
             if( d.file.indexOf('assets/resources/dynamic/extend/furnitures/textures') > 0 ){
                 const name = path.basename(d.file, '.png');
+                let sizeFrom = d.sizeFrom;
+                if( !sizeFrom && this.sizeCfg[name] ){
+                    sizeFrom = this.sizeCfg[name].sizeFrom;
+                }
                 cfg[name] = {
-                    sizeFrom: d.sizeFrom,
+                    sizeFrom: sizeFrom,
                     sizeTo: d.sizeTo
                 };
             }
         });
-        fs.writeFileSync( path.resolve(Editor.projectInfo.path, './assets/script/data/config/config.furnitures_size.ts'), `export default ${JSON.stringify(cfg, null, 4)}` );
+        fs.writeFileSync( outFile, `export default ${JSON.stringify(cfg, null, 4)}` );
         Editor.assetdb.refresh(`db://assets/script/data/config/config.furnitures_size.ts`);
     }
 
