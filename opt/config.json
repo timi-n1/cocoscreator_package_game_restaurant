@@ -137,8 +137,7 @@
             "original_steamer/original_steamer.png",
             "original_carpet/original_carpet.png",
             "original_sink/original_sink.png",
-            "original_cashregister/original_cashregister.png",
-            "bake_oven/bake_oven.png"
+            "original_cashregister/original_cashregister.png"
         ],
         "limit": {
             "widthMin": 260
