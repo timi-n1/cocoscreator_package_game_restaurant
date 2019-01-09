@@ -28,7 +28,7 @@ class ExcelMaker {
         //简要中文
         this.keyListSimple = ['talk_btn1', 'talk_btn2', 'talk_btn3', 'complete_btn1', 'complete_btn2', 'complete_btn3'];
         this.cnCacheSimple = {};
-        this.keyInt = ['id', 'pid', 'price', 'type', 'sub_type', 'pose_ids', 'ancient', 'modern', 'east', 'west', 'toy_sub_type', 'rare', 'intimacy', 'award', 'character', 'dispatch', 'cat_type', 'play_time', 'is_skin', 'sampleCatId', 'torso_offsetx', 'torso_offsety', 'is_multi', 'stock_price', 'bonus_price', 'sour', 'sweet', 'bitter', 'spicy', 'oa_unlock', 'effects_type', 'effects', 'learn_time', 'show_order', "scores", "level1", "level2", "level3",'unlock_fid', 'unlock_fid_level','level','cooking_exp',"food_quality",'update_exp'];
+        this.keyInt = ['id', 'pid', 'price', 'type', 'sub_type', 'pose_ids', 'ancient', 'modern', 'east', 'west', 'toy_sub_type', 'rare', 'intimacy', 'award', 'character', 'dispatch', 'cat_type', 'play_time', 'is_skin', 'sampleCatId', 'torso_offsetx', 'torso_offsety', 'is_multi', 'stock_price', 'bonus_price', 'sour', 'sweet', 'bitter', 'spicy', 'oa_unlock', 'effects_type', 'effects', 'learn_time', 'show_order', "scores", "level1", "level2", "level3",'unlock_fid', 'unlock_fid_level','level','cooking_exp',"food_quality",'update_exp','place_id','piece1','piece2','piece3','piece4','piece5','piece6','piece7','piece8','piece9','piece10','piece11','piece12','piece13','piece14','piece15','piece_id','piece_id_1','piece_id_2','piece_id_3','piece_id_4','piece_num_1','piece_num_2','piece_num_3','piece_num_4'];
 
         this.keyFloat = ['anchorx', 'anchory','price_addition'];
         this.keyIntArray = ['id_list', 'anima_list', 'yard_type', 'story_list', 'intimacy_list', 'like_food'];//默认按照,(半角)分割
