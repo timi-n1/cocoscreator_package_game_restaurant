@@ -88,12 +88,12 @@ class ToysMaker {
                     });
                 },
                 //分享
-                (callback)=>{
-                    Jimp.read(fileImage, (err, lenna) => {
-                        lenna.scaleToFit(390, 296).write(fileShare);
-                        callback();
-                    });
-                },
+                // (callback)=>{
+                //     Jimp.read(fileImage, (err, lenna) => {
+                //         lenna.scaleToFit(390, 296).write(fileShare);
+                //         callback();
+                //     });
+                // },
             ], ()=>{
                 this._refreshTexture(entry.basename);
                 Editor.log(`[食物]${entry.basename}`);
