@@ -86,7 +86,7 @@ function mergeAllFoodMedals(done){
         //console.log('all done');
         let foodList = searchAllFoods();
         async.eachOfSeries(entryList, (entry, index, cb) => {
-            let bg = path.resolve(foodMedalOutDir, `./medal_share_${entry.basename}.png`);
+            let bg = path.resolve(foodMedalOutDir, `./share_${entry.basename}.png`);
             mergeImgList(bg, `share_${entry.basename}_`, '', foodList, shareOutDir, ()=>{
                 cb();
             }, true);
